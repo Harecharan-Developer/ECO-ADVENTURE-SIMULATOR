@@ -265,20 +265,22 @@ class BotPlayer(pygame.sprite.Sprite):
         self.speed = speed
 
     def update(self):
-        # Get the positions of the falling items
-        acid_rain_positions = [(acid_rain.rect.x, acid_rain.rect.y) for acid_rain in acid_rain_group]
-        for i in range(1000):
-            i=i+0.01
-        # Choose the closest falling item
-        closest_acid_rain = min(acid_rain_positions, key=lambda pos: abs(pos[0] - self.rect.centerx) + abs(pos[1] - self.rect.centery))
+        random_no=random.randint(0,100)
+        if random_no >85:
+            # Get the positions of the falling items
+            acid_rain_positions = [(acid_rain.rect.x, acid_rain.rect.y) for acid_rain in acid_rain_group]
+            for i in range(1000):
+                i=i+0.01
+            # Choose the closest falling item
+            closest_acid_rain = min(acid_rain_positions, key=lambda pos: abs(pos[0] - self.rect.centerx) + abs(pos[1] - self.rect.centery))
 
-        # Move towards the closest falling item
-        if closest_acid_rain[0] < self.rect.centerx and self.rect.left > 0:
-            self.rect.x -= self.speed
-            self.image = pygame.transform.scale(left_bin_pic, (int(screen_width/15), int(screen_height/8)))
-        elif closest_acid_rain[0] > self.rect.centerx and self.rect.right < half_screen_width:
-            self.rect.x += self.speed
-            self.image = pygame.transform.scale(right_bin_pic, (int(screen_width/15), int(screen_height/8)))
+            # Move towards the closest falling item
+            if closest_acid_rain[0] < self.rect.centerx and self.rect.left > 0:
+                self.rect.x -= self.speed
+                self.image = pygame.transform.scale(left_bin_pic, (int(screen_width/15), int(screen_height/8)))
+            elif closest_acid_rain[0] > self.rect.centerx and self.rect.right < half_screen_width:
+                self.rect.x += self.speed
+                self.image = pygame.transform.scale(right_bin_pic, (int(screen_width/15), int(screen_height/8)))
 
 
 #create cloud class
